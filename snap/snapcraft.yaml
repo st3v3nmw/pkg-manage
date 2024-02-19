@@ -1,0 +1,55 @@
+name: pkg-manage
+base: core22
+version: '0.1'
+summary: Package management using packagekit-control
+description: |
+  Testing package management using the packagekit-control snap interface.
+
+grade: devel
+confinement: devmode
+
+apps:
+  pkg-manage:
+    command: bin/pkg-manage
+    plugs:
+      - packagekit-control
+
+  pkcon:
+    command: usr/bin/pkcon
+    plugs:
+      - packagekit-control
+
+parts:
+  packagekit-tools:
+    plugin: nil
+    stage-packages:
+      - packagekit-tools
+    stage:
+      - usr/bin/pkcon
+      - usr/lib/*/libpackagekit-glib2.so*
+
+  pkg-manage:
+    plugin: python
+    source: .
+    build-packages:
+      - pkg-config
+      - libcairo2-dev
+      - libgirepository1.0-dev
+    stage-packages:
+      - libx11-6
+      - libxau6
+      - libxdmcp6
+      - libxext6
+      - libxrender1
+      - libcairo2
+      - libfontconfig1
+      - libpixman-1-0
+      - libxcb-render0
+      - libxcb-shm0
+      - libxcb1
+      - libgirepository-1.0-1
+      - libcairo-gobject2
+    parse-info:
+      - setup.py
+    python-requirements:
+      - requirements.txt
