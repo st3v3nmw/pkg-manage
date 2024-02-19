@@ -7,7 +7,7 @@ gi.require_version("PackageKitGlib", "1.0")
 from gi.repository import PackageKitGlib
 
 
-def progress(progress, *_):
+def progress(progress: Any, *_: Any) -> None:
     """Print out the progress."""
     status = progress.get_status()
     if status == PackageKitGlib.StatusEnum.UNKNOWN:
@@ -34,7 +34,7 @@ def explode_if_err(func: Callable[..., Any]) -> Callable[..., Any]:
     return wrapper
 
 
-def get_package_id(pk_client, name: str) -> str:
+def get_package_id(pk_client: Any, name: str) -> str:
     """Get the package id from its name."""
     result = explode_if_err(pk_client.resolve)(
         filters=PackageKitGlib.FilterEnum.NONE,
@@ -48,7 +48,7 @@ def get_package_id(pk_client, name: str) -> str:
     return package_ids[0].get_id()
 
 
-def list_pkgs():
+def list_pkgs() -> None:
     """List installed packages."""
     pk_client = PackageKitGlib.Client()
 
@@ -68,7 +68,7 @@ def list_pkgs():
         print(f"{name}-{version}.{arch} ({pkg.get_data()})")
 
 
-def install_pkg(name: str):
+def install_pkg(name: str) -> None:
     """Install a package."""
     pk_client = PackageKitGlib.Client()
     package_id = get_package_id(pk_client, name)
@@ -82,7 +82,7 @@ def install_pkg(name: str):
     )
 
 
-def remove_pkg(name: str):
+def remove_pkg(name: str) -> None:
     """Remove a package."""
     pk_client = PackageKitGlib.Client()
     package_id = get_package_id(pk_client, name)

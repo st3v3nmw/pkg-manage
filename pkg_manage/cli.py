@@ -11,16 +11,16 @@ def run_cmd(cmd: str) -> str:
     return f"{proc.stdout} {proc.stderr}"
 
 
-def list_pkgs() -> tuple[str, bool]:
+def list_pkgs() -> None:
     """List installed packages."""
     print(run_cmd("pkcon get-packages --filter installed --plain"))
 
 
-def install_pkg(name: str) -> tuple[str, bool]:
+def install_pkg(name: str) -> None:
     """Install a package."""
     print(run_cmd(f"pkcon install {name} -y --plain"))
 
 
-def remove_pkg(name: str) -> tuple[str, bool]:
+def remove_pkg(name: str) -> None:
     """Remove a package."""
     print(run_cmd(f"pkcon remove {name} -y --plain"))
