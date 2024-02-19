@@ -27,7 +27,6 @@ def explode_if_err(func: Callable[..., Any]) -> Callable[..., Any]:
     def wrapper(*args: Any, **kwargs: Any) -> Any:
         result = func(*args, **kwargs)
         err = result.get_error_code()
-        print("err", err)
         if err:
             raise RuntimeError(err.get_details())
         return result
@@ -54,7 +53,7 @@ def list_pkgs():
     pk_client = PackageKitGlib.Client()
 
     results = explode_if_err(pk_client.get_packages)(
-        # TODO: Fix this filter, NOW WORKING
+        # TODO: Fix this filter, NOT WORKING
         filters=PackageKitGlib.FilterEnum.INSTALLED,
         cancellable=None,
         progress_callback=progress,
