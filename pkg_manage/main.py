@@ -3,7 +3,12 @@ import argparse
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--mode", type=str, default="cli")
+    parser.add_argument(
+        "--mode",
+        type=str,
+        choices=["cli", "lib"],
+        default="cli",
+    )
     subparsers = parser.add_subparsers(required=True, dest="subparser")
     subparsers.add_parser("list")
     parser_install = subparsers.add_parser("install")
@@ -18,8 +23,8 @@ def main() -> None:
         from pkg_manage.lib import install_pkg, list_pkgs, remove_pkg
 
     if args.subparser == "list":
-        print(list_pkgs()[0])
+        list_pkgs()
     elif args.subparser == "install":
-        print(install_pkg(args.name)[0])
+        install_pkg(args.name)
     else:
-        print(remove_pkg(args.name)[0])
+        remove_pkg(args.name)
