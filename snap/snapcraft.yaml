@@ -35,6 +35,7 @@ parts:
       - pkg-config
       - libcairo2-dev
       - libgirepository1.0-dev
+      - packagekit-tools
     stage-packages:
       - libx11-6
       - libxau6
@@ -49,6 +50,9 @@ parts:
       - libxcb1
       - libgirepository-1.0-1
       - libcairo-gobject2
+      - gir1.2-glib-2.0
+      - libpackagekit-glib2-18
+      - gir1.2-packagekitglib-1.0
     parse-info:
       - setup.py
     python-requirements:
